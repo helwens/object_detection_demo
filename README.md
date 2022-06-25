@@ -20,7 +20,7 @@
 
 3、手机连接电脑，打开**USB调试**和**文件传输模式**，在 DevEco Studio 上连接自己的手机设备（手机需要开启允许从 USB 安装软件权限）
 
-![studio](D:\Harmony\object_detection_demo\docs\images\studio.png)
+![studio](https://github.com/helwens/object_detection_demo/blob/main/docs/images/studio.png)
 
 4.真机运行前需要配置签名（如果使用模拟器运行可跳过这一步）
 请根据华为官网[使用真机进行调试](https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ide_debug_device-0000001053822404#section20493196162)
@@ -36,8 +36,8 @@ the instructions to configure the signature information.
 
 成功后效果如下，图一：APP 安装到手机        图二： APP 打开后的效果，会自动识别图片中的物体并标记
 
-<p align="center"><img width="300" height="450"  src="D:\Harmony\object_detection_demo\docs\images\app install.jpg"/>
-&#8194;&#8194;&#8194;&#8194;&#8194;<img width="300" height="450"  src="D:\Harmony\object_detection_demo\docs\images\eason.png"/></p>
+<p align="center"><img width="300" height="450"  src="https://github.com/helwens/object_detection_demo/blob/main/docs/images/app install.jpg"/>
+&#8194;&#8194;&#8194;&#8194;&#8194;<img width="300" height="450"  src="https://github.com/helwens/object_detection_demo/blob/main/docs/images/eason.png"/></p>
 
 
 ## Harmony demo 结构讲解
