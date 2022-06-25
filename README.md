@@ -20,25 +20,29 @@
 
 3、手机连接电脑，打开**USB调试**和**文件传输模式**，在 DevEco Studio 上连接自己的手机设备（手机需要开启允许从 USB 安装软件权限）
 
-!!!!!!!!!!!!!!!截图截图!!!!!!!!!!!!!!!!!!!!
+![studio](D:\Harmony\object_detection_demo\docs\images\studio.png)
 
->**注意：** 	!!!!!!!!!!!!!!!!!!!!签名问题
->> 如果您在导入项目、编译或者运行过程中遇到NDK配置错误的提示，请打开 ` File > Project Structure > SDK Location`，修改 `Andriod NDK location` 为您本机配置的 NDK 所在路径。
->> 如果您是通过 Andriod Studio 的 SDK Tools 下载的 NDK (见本章节"预先要求")，可以直接点击下拉框选择默认路径。
->> 如果以上步骤仍旧无法解决NDK配置错误，请尝试根据 Andriod Studio 官方文档中的[更新 Android Gradle 插件](https://developer.android.com/studio/releases/gradle-plugin?hl=zh-cn#updating-plugin)章节，尝试更新Android Gradle plugin版本。
+4.真机运行前需要配置签名（如果使用模拟器运行可跳过这一步）
+请根据华为官网[使用真机进行调试](https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ide_debug_device-0000001053822404#section20493196162)
+进行配置
+>**注意：**
+> 如果真机运行未配置签名可能会出现错误提示，
+Failure[INSTALL_FAILED_NO_BUNDLE_SIGNATURE]
+Sign the app before running it on a real device.
+the instructions to configure the signature information.
 
-<p align="center"><img width="600" height="450"  src="https://paddlelite-data.bj.bcebos.com/doc_images/Android_iOS_demo/android/Andriod_Studio_NDK.png"/></p>
+5、按下 Run 按钮，自动编译 APP 并安装到手机。(该过程会自动下载 Paddle Lite 预测库和模型，需要联网)
 
-4、按下 Run 按钮，自动编译 APP 并安装到手机。(该过程会自动下载 Paddle Lite 预测库和模型，需要联网)
 
 成功后效果如下，图一：APP 安装到手机        图二： APP 打开后的效果，会自动识别图片中的物体并标记
 
-<p align="center"><img width="300" height="450"  src="https://paddlelite-data.bj.bcebos.com/doc_images/Android_iOS_demo/android/AndroidApp0.png"/>&#8194;&#8194;&#8194;&#8194;&#8194;<img width="300" height="450"  src="https://paddlelite-data.bj.bcebos.com/doc_images/Android_iOS_demo/android/AndroidApp1.jpg"/></p>
+<p align="center"><img width="300" height="450"  src="D:\Harmony\object_detection_demo\docs\images\app install.jpg"/>
+&#8194;&#8194;&#8194;&#8194;&#8194;<img width="300" height="450"  src="D:\Harmony\object_detection_demo\docs\images\eason.png"/></p>
 
 
-## Android demo 结构讲解
+## Harmony demo 结构讲解
 
-Android 示例的代码结构如下图所示：
+Harmony 示例的代码结构如下图所示：
 
 <p align="center"><img width="600" height="450"  src="http://paddlelite-data.bj.bcebos.com/doc_images/Android_iOS_demo/android/Android_struct.png"/></p>
 
