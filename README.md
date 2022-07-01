@@ -44,45 +44,46 @@ the instructions to configure the signature information.
 
 Harmony 示例的代码结构如下图所示：
 
-<p align="center"><img width="600" height="450"  src="http://paddlelite-data.bj.bcebos.com/doc_images/Android_iOS_demo/android/Android_struct.png"/></p>
+<p align="center"><img width="695" height="900"  src="D:\Harmony\object_detection_demo\docs\images\code_structure.png"/></p>
 
 
 1、 `Predictor.java`： 预测代码
 
 ```shell
 # 位置：
-object_detection_demo/app/src/main/java/com/baidu/paddle/lite/demo/object_detection/Predictor.java
+object_detection_demo\entry\src\main\java\com\baidu\paddle\lite\demo\object_detection\Predictor.java
 ```
 
 2、 `model.nb` : 模型文件 (opt 工具转化后 Paddle Lite 模型), `pascalvoc_label_list`：训练模型时的 `labels` 文件
 
 ```shell
 # 位置：
-object_detection_demo/app/src/main/assets/models/ssd_mobilenet_v1_pascalvoc_for_cpu/model.nb
-object_detection_demo/app/src/main/assets/labels/pascalvoc_label_list
-# 如果要替换模型，可以将新模型放到 `object_detection_demo/app/src/main/assets/models/ssd_mobilenet_v1_pascalvoc_for_cpu` 目录下
+object_detection_demo\entry\src\main\resources\rawfile\models\ssd_mobilenet_v1_pascalvoc_for_cpu\model.nb
+object_detection_demo\entry\src\main\resources\rawfile\labels\pascalvoc_label_list
+# 如果要替换模型，可以将新模型放到 `object_detection_demo\entry\src\main\resources\rawfile\models\ssd_mobilenet_v1_pascalvoc_for_cpu` 目录下
+# 同时模型对应的标签文件也可能不同，需要替换到`object_detection_demo\entry\src\main\resources\rawfile\labels` 目录下
 ```
 
 3、 `libpaddle_lite_jni.so、PaddlePredictor.jar`：Paddle Lite Java 预测库与 Jar 包
 
 ```shell
 # 位置
-object_detection_demo/app/src/main/jniLibs/arm64-v8a/libpaddle_lite_jni.so
-object_detection_demo/app/libs/PaddlePredictor.jar
-# 如果要替换动态库 so 和 jar 文件，则将新的动态库 so 更新到 `object_detection_demo/app/src/main/jniLibs/arm64-v8a/` 目录下，新的 jar 文件更新至 `object_detection_demo/app/libs/` 目录下
+object_detection_demo\entry\libs\arm64-v8a\libpaddle_lite_jni.so
+object_detection_demo\entry\libs\PaddlePredictor.jar
+# 如果要替换动态库 so 和 jar 文件，则将新的动态库 so 更新到 `object_detection_demo\entry\libs\arm64-v8a\` 目录下，新的 jar 文件更新至 `object_detection_demo\entry\libs\` 目录下
 ```
 
 4、`build.gradle` : 定义编译过程的 gradle 脚本。（不用改动，定义了自动下载 Paddle Lite 预测和模型的过程）
 
 ```shell
 # 位置
-object_detection_demo/app/build.gradle
+object_detection_demo\build.gradle
 # 如果需要手动更新模型和预测库，则可将 gradle 脚本中的 `download*` 接口注释即可
 ```
 
 ## 代码讲解 （使用 Paddle Lite `Java API` 执行预测）
 
-Android 示例基于 Java API 开发，调用 Paddle Lite `Java API` 包括以下五步。更详细的 `API` 描述参考：[Paddle Lite Java API ](../api_reference/java_api_doc)。
+Harmony 示例基于 Java API 开发，调用 Paddle Lite `Java API` 包括以下五步。更详细的 `API` 描述参考：[Paddle Lite Java API ](../api_reference/java_api_doc)。
 
 ```c++
 // 导入 Java API
@@ -163,12 +164,10 @@ Tensor outputTensor = getOutput(0);
 
 ### Q&A:
 问题：
-- 提示某个 `op not found`:
-  - 如果编译选项没有打开 `with_extra` 的选项，可以打开 `with_extra` 的选项再尝试；如果仍存在缺少 `op` 的错误提示，则是目前 Paddle Lite 尚未支持该 `op` ，可以在 github repo 里提 issue 等待版本迭代，或者参考[添加 op ](../develop_guides/add_operation.md)来自行添 `op` 并重新编译。
 - 提示 `in_dims().size() == 4 || in_dims.size() == 5 test error`
   - 如果你是基于我们的 demo 工程替换模型以后出现这个问题，有可能是替换模型以后模型的输入和 Paddle Lite 接收的输入不匹配导致，可以参考[ issue 6406 ](https://github.com/PaddlePaddle/Paddle-Lite/issues/6406)来解决该问题。
 - 如果想进一步提高 APP 速度：
-  - 可以将 APP 的默认线程数由线程数 1 更新为多线程，如 2/4 线程。另外，APP 的 setting 界面提供了多线程选项，即可在 setting 界面进行线程数更新，不用重新编译和安装啦。
+  - 可以将 APP 的默认线程数由线程数 1 更新为多线程，如 4 线程--modelConfig.setThreads(4);
   - 多线程使用限制：线程数最大值是手机大核处理器的个数，如小米 9，它由 4 个 A76 大核组成，即最大运行 4 个线程。
   - 多线程预测库：GCC 编译，V7/V8 多线程均支持；clang 编译下，只支持V8 多线程，V7 多线程编译受限于 NDK，当前 NDK >= 17, 编译报错，问题来源 NDK 内部 clang 编译的寄存器数目限制。
 - 如果想用 FP16 模型推理：

@@ -62,7 +62,7 @@
     },
     {
       "name": "LABEL_PATH_DEFAULT",
-      "value": "entry/resources/rawfile/labels/labelmap"
+      "value": "entry/resources/rawfile/labels/pascalvoc_label_list"
     },
     {
       "name": "IMAGE_PATH_DEFAULT",
