@@ -44,7 +44,7 @@ the instructions to configure the signature information.
 
 Harmony 示例的代码结构如下图所示：
 
-<p align="center"><img width="695" height="900"  src="D:\Harmony\object_detection_demo\docs\images\code_structure.png"/></p>
+<p align="center"><img width="695" height="900"  src="https://github.com/helwens/object_detection_demo/blob/main/docs\images\code_structure.png"/></p>
 
 
 1、 `Predictor.java`： 预测代码
